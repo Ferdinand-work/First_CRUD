@@ -1,0 +1,478 @@
+/* src/components/EmployeeList.css */
+
+.employee-list {
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    color: #fff;
+    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between icon and text */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.search-filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Add padding on the right to make room for the icon */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 18px; /* Adjust size as needed */
+    color: #888; /* Adjust color if needed */
+}
+
+.filter-clear-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between icon and text */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.filter-icon {
+    font-size: 14px; /* Adjust size as needed */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1;
+    width: 250px;
+    padding: 10px;
+}
+
+.filter-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.filter-section {
+    margin-bottom: 10px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dropdown-select,
+.filter-input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.clear-filters-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between icon and text */
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.clear-filters-button:hover {
+    background-color: #c82333;
+}
+
+.employee-container {
+    list-style-type: none;
+    padding: 0;
+}
+
+.employee-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.employee-item:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.005);
+}
+
+.employee-details p {
+    margin: 5px 0;
+}
+
+.employee-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between icon and text */
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #218838;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Optional: Additional icon styling if needed */
+.fas {
+    font-size: 16px; /* Adjust size of Font Awesome icons */
+}
+
+/* Add these styles to your existing CSS file */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .page-button {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text color */
+    border: none; /* No border */
+    padding: 5px 8px; /* Adjust padding to make buttons smaller */
+    margin: 0 3px; /* Reduce margin to decrease space between buttons */
+    border-radius: 4px; /* Slightly smaller border-radius */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Smaller font size */
+    line-height: 1.2; /* Adjust line height for better text alignment */
+}
+
+  
+  .page-button.active {
+    background-color: #0056b3;
+  }
+  
+  .page-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    margin: 0 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.page-button.active {
+    background-color: #0056b3; /* Highlight the active page button */
+}
+
+.page-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.page-button i {
+    margin: 0 5px;
+}
+
+.search-filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+
+.sort-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-clear-container, .sort-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.filter-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.clear-filters-button {
+    padding: 8px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.page-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.page-button.active {
+    background-color: #0056b3;
+}
+
+.page-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.page-button i {
+    margin: 0 4px;
+}
+
+.sort-select .fa {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+/* src/components/EmployeeList.css */
+
+/* General Button Styles */
+button, .button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Add gradient and hover effects to the buttons */
+.add-button, .filter-button, .clear-filters-button, .page-button, .sort-select, .employee-actions .edit-button, .employee-actions .delete-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: #fff;
+    padding: 8px 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover, .filter-button:hover, .clear-filters-button:hover, .page-button:hover, .employee-actions .edit-button:hover, .employee-actions .delete-button:hover {
+    background: linear-gradient(90deg, #0056b3, #004494);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.sort-select:hover
+{
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+    cursor:pointer;
+}
+/* Specific Button Styles */
+.add-button {
+    background: linear-gradient(90deg, #28a745, #218838);
+}
+
+.add-button:hover {
+    background: linear-gradient(90deg, #218838, #1e7e34);
+}
+
+.filter-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+.filter-button:hover {
+    background: linear-gradient(90deg, #0056b3, #004494);
+}
+
+.clear-filters-button {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+}
+
+.clear-filters-button:hover {
+    background: linear-gradient(90deg, #c82333, #bd2130);
+}
+
+.page-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 16px;
+}
+
+.page-button.active {
+    background: linear-gradient(90deg, #0056b3, #004494);
+}
+
+.page-button:disabled {
+    background: linear-gradient(90deg, #cccccc, #b3b3b3);
+    cursor: not-allowed;
+}
+
+.sort-select {
+    background: white;
+    color: #000000;
+    padding: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+
+.employee-actions .edit-button {
+    background: linear-gradient(90deg, #28a745, #218838);
+}
+
+.employee-actions .edit-button:hover {
+    background: linear-gradient(90deg, #218838, #1e7e34);
+}
+
+.employee-actions .delete-button {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+}
+
+.employee-actions .delete-button:hover {
+    background: linear-gradient(90deg, #c82333, #bd2130);
+}
