@@ -32,7 +32,7 @@ const EmployeeDetail = () => {
       <div className="detail-card">
         <p><strong>Employee Name:</strong> {employee.empName}</p>
         <p><strong>Location:</strong> {employee.location}</p>
-        <p><strong>Salary:</strong> ${employee.salary}</p>
+        <p><strong>Salary:</strong> {employee.salary} Rs.</p>
       </div>
     </div>
   );

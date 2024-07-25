@@ -1,5 +1,6 @@
 /* src/components/EmployeeList.css */
 
+
 .employee-list {
     padding: 20px;
     background-color: #f4f4f9;
@@ -98,7 +99,7 @@ h1 {
 }
 
 .filter-icon {
-    font-size: 14px; /* Adjust size as needed */
+    font-size: 16px; /* Adjust size as needed */
 }
 
 .dropdown-content {
@@ -476,3 +477,5 @@ button, .button {
 .employee-actions .delete-button:hover {
     background: linear-gradient(90deg, #c82333, #bd2130);
 }
+
+

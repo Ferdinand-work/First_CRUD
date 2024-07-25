@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { getEmployees, deleteEmployee } from '../services/employeeService';
-import { Link } from 'react-router-dom';
+import { Link, Navigate,useNavigate } from 'react-router-dom';
 import './EmployeeList.css'; // Importing CSS for styling
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
+import { AuthContext } from './AuthProvider';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -16,6 +17,8 @@ const EmployeeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(5); // Set number of employees per page to 5
   const [sortOption, setSortOption] = useState(''); // New state for sorting option
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -42,7 +45,7 @@ const EmployeeList = () => {
         const matchesName = employee.empName.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesLocation = selectedLocation ? employee.location === selectedLocation : true;
         const matchesSalary = (minSalary === '' || employee.salary >= minSalary) &&
-                               (maxSalary === '' || employee.salary <= maxSalary);
+          (maxSalary === '' || employee.salary <= maxSalary);
         return matchesName && matchesLocation && matchesSalary;
       });
 
@@ -72,6 +75,11 @@ const EmployeeList = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleSignOut = () => {
+    localStorage.setItem('token',"");
+    navigate("/");
   };
 
   const handlePrevPage = useCallback(() => {
@@ -118,6 +126,7 @@ const EmployeeList = () => {
   }, [handlePrevPage, handleNextPage]);
 
   return (
+    (!(localStorage.getItem('token') === "{JWT_SECRET}") && !isAuthenticated)?<Navigate to="/login"/>:
     <div className="employee-list">
       <h1>Employee Database</h1>
       <div className="search-filter-container">
@@ -193,6 +202,9 @@ const EmployeeList = () => {
           <Link to="/add" className="add-button">
             <i className="fas fa-user-plus"></i> Add Employee
           </Link>
+          <button className="clear-filters-button" onClick={handleSignOut}>
+            SignOut
+          </button>
         </div>
       </div>
       {error && <p className="error-message">{error}</p>}
@@ -212,6 +224,9 @@ const EmployeeList = () => {
                 <button onClick={() => handleDelete(employee.id)} className="delete-button">
                   <i className="fas fa-trash"></i> Delete
                 </button>
+                <Link to={`/detail/${employee.id}`} className="edit-button">
+                <i class="fa-solid fa-eye"></i> Details
+                </Link>
               </div>
             </li>
           ))
@@ -241,7 +256,7 @@ const EmployeeList = () => {
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
         >
-           <i className="fas fa-chevron-right"></i>
+          <i className="fas fa-chevron-right"></i>
         </button>
       </div>
     </div>
