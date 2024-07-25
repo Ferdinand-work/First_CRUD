@@ -1,15 +1,10 @@
 package com.first.crud_demo.controller;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import com.first.crud_demo.dto.UserTO;
-import com.first.crud_demo.model.User;
 import com.first.crud_demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/usr")
