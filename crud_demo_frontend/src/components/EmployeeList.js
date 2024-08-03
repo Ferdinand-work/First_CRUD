@@ -79,7 +79,7 @@ const EmployeeList = () => {
 
   const handleSignOut = () => {
     localStorage.setItem('token',"");
-    navigate("/");
+    navigate("/login");
   };
 
   const handlePrevPage = useCallback(() => {

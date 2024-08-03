@@ -1,6 +1,8 @@
 package com.first.crud_demo.controller;
 import com.first.crud_demo.dto.UserTO;
 import com.first.crud_demo.service.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 
 public class UserController {
-    private String jwtSecret = "{JWT_SECRET}";
 
     @Autowired
     private UserService userService;
@@ -30,7 +31,11 @@ public class UserController {
 
         if (isAuthenticated) {
             // Generate JWT token
-            return jwtSecret;
+            String jwtSecret = "{JWT_SECRET}";
+            return Jwts.builder()
+                    .setSubject(usr.getEmail())
+                    .signWith(SignatureAlgorithm.HS256, jwtSecret.getBytes())
+                    .compact();
         }
         return "";
     }
