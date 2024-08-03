@@ -62,19 +62,6 @@ This project is a simple CRUD (Create, Read, Update, Delete) application based o
     npm start
     ```
 
-4. **Configure JWT**
-   - Update API endpoints in your React application to include the JWT token in requests.
-   - Example:
-     ```js
-     fetch('http://localhost:8080/api/resource', {
-       method: 'GET',
-       headers: {
-         'Authorization': `Bearer ${yourToken}`
-       }
-     });
-     ```
-   - Handle JWT storage in your React application, for example in local storage or cookies.
-
 ## Usage
 
 1. **Start the backend server** and ensure it is running on [http://localhost:8080](http://localhost:8080).
