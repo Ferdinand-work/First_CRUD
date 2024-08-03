@@ -77,9 +77,4 @@ This project is a simple CRUD (Create, Read, Update, Delete) application based o
 4. **Push to the branch** (e.g., `git push origin feature-foo`)
 5. **Create a new Pull Request**
 
-## JWT Integration
-
-- **Login Endpoint**: Use `/api/auth/login` to obtain a JWT token. You will need to provide credentials in the request body.
-- **Protected Endpoints**: Include the `Authorization` header with the value `Bearer <your_token>` in requests to access protected resources.
-- **Token Storage**: Store the JWT securely in your frontend application, such as in local storage or cookies.
 
