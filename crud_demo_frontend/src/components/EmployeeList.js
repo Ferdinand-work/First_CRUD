@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { getEmployees, deleteEmployee } from '../services/employeeService';
 import { Link, Navigate,useNavigate } from 'react-router-dom';
 import './EmployeeList.css'; // Importing CSS for styling
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
-import { AuthContext } from './AuthProvider';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -17,8 +16,9 @@ const EmployeeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(5); // Set number of employees per page to 5
   const [sortOption, setSortOption] = useState(''); // New state for sorting option
-  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -59,8 +59,9 @@ const EmployeeList = () => {
       } else if (sortOption === 'salary-desc') {
         filtered.sort((a, b) => b.salary - a.salary);
       }
-
+      
       setFilteredEmployees(filtered);
+      setCurrentPage(1);
     };
 
     applyFiltersAndSort();
@@ -95,6 +96,7 @@ const EmployeeList = () => {
       await deleteEmployee(id);
       setEmployees(employees.filter(employee => employee.id !== id));
       setFilteredEmployees(filteredEmployees.filter(employee => employee.id !== id));
+      if(employees.length%employeesPerPage === 0 && currentPage !== 1) setCurrentPage(currentPage-1);
     } catch (error) {
       setError('Error deleting employee.');
       console.error('Error deleting employee:', error);
@@ -125,8 +127,14 @@ const EmployeeList = () => {
     };
   }, [handlePrevPage, handleNextPage]);
 
+  const token = localStorage.getItem('token');
+
+  // Redirect to login if token is not available
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
   return (
-    (!(localStorage.getItem('token') === "{JWT_SECRET}") && !isAuthenticated)?<Navigate to="/login"/>:
     <div className="employee-list">
       <h1>Employee Database</h1>
       <div className="search-filter-container">
@@ -203,7 +211,7 @@ const EmployeeList = () => {
             <i className="fas fa-user-plus"></i> Add Employee
           </Link>
           <button className="clear-filters-button" onClick={handleSignOut}>
-            SignOut
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
           </button>
         </div>
       </div>
