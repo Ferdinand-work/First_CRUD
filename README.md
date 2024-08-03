@@ -18,7 +18,7 @@ This project is a simple CRUD (Create, Read, Update, Delete) application based o
 
     ```sh
     git clone https://github.com/Ferdinand-work/First_CRUD.git
-    cd First_CRUD/crud_demo_backend
+    cd First_CRUD/crud_demo
     ```
 
 2. **Install dependencies**
